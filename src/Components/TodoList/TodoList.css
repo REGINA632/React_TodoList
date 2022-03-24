@@ -1,0 +1,10 @@
+.completed {
+  text-decoration: line-through;
+  color: grey;
+}
+li {
+  color: black;
+}
+button {
+  margin-left: 10px;
+}

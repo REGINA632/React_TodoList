@@ -8,11 +8,16 @@ const TodoList = (props) => {
   return (
     <ul style={style}>
       {props.todos.map((item, index) => (
-        <li key={item.id} className={item.status ? "completed" : ""}>
+        <li key={item.id} className={item.status === true ? "completed" : ""}>
           <input onChange={() => props.changeStatus(item.id)} type="checkbox" />
           {item.task}
-          <button onClick={() => props.handleDelete(item.id)}>&times;</button>
-          <button onClick={() => props.handleEdit(index)}>Edit</button>
+          <button onClick={() => props.handleDelete(item.id)}>Delete</button>
+          <button
+            onClick={() => props.handleEdit(index)}
+            disabled={item.status === true ? true : false}
+          >
+            Edit
+          </button>
         </li>
       ))}
     </ul>

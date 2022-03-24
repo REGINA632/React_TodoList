@@ -19,16 +19,15 @@ const EditModal = (props) => {
   return (
     <div className="main-modal">
       <div className="inner-modal">
-        <div className="close">
-          <button onClick={props.handleCloseModal}>&times;</button>
-        </div>
+        <h2>Change</h2>
         <input
           onChange={handleEditInput}
           type="text"
           value={item.task}
           className="inp-edit"
         />
-        <button onClick={handleSave}>save</button>
+        <button onClick={handleSave}>Save</button>
+        <button onClick={props.handleCloseModal}>Close</button>
       </div>
     </div>
   );

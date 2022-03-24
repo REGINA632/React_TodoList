@@ -5,7 +5,11 @@ import EditModal from "./Components/EditModal/EditModal";
 import TodoList from "./Components/TodoList/TodoList";
 
 function App() {
-  let [todos, setTodos] = useState([]);
+  let [todos, setTodos] = useState([
+    { id: 1, task: "Apple", status: false },
+    { id: 2, task: "Rice", status: false },
+    { id: 3, task: "Sugar", status: false },
+  ]);
   let [modal, setModal] = useState(false);
   let [editTodo, setEditTodo] = useState({});
 

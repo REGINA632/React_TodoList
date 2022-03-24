@@ -19,6 +19,7 @@ const AddTodo = (props) => {
 
   return (
     <>
+      <h1>Products</h1>
       <input value={task} onChange={handleInput} type="text" />
       <button onClick={handleAdd}>Add</button>
     </>
