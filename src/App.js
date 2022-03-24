@@ -1,23 +1,79 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import AddTodo from "./Components/AddTodo/AddTodo";
+import EditModal from "./Components/EditModal/EditModal";
+import TodoList from "./Components/TodoList/TodoList";
 
 function App() {
+  let [todos, setTodos] = useState([]);
+  let [modal, setModal] = useState(false);
+  let [editTodo, setEditTodo] = useState({});
+
+  function handleTask(newObj) {
+    let newTodos = [...todos];
+
+    newTodos.push(newObj);
+    setTodos(newTodos);
+  }
+
+  function changeStatus(id) {
+    const newTodos = todos.map((item) => {
+      if (item.id === id) {
+        item.status = !item.status;
+      }
+      return item;
+    });
+
+    setTodos(newTodos);
+  }
+
+  function handleDelete(id) {
+    // console.log(id);
+    let newTodos = todos.filter((item) => {
+      return item.id !== id;
+    });
+    // console.log(newTodos);
+    setTodos(newTodos);
+  }
+
+  function handleEdit(index) {
+    // console.log(index);
+    setModal(true);
+    setEditTodo(todos[index]);
+  }
+
+  function handleSaveTask(newTask) {
+    const newTodos = todos.map((item) => {
+      if (item.id === newTask.id) {
+        return newTask;
+      }
+      return item;
+    });
+
+    setTodos(newTodos);
+    handleCloseModal();
+  }
+
+  function handleCloseModal() {
+    setModal(false);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AddTodo handleTask={handleTask} />
+      <TodoList
+        todos={todos}
+        changeStatus={changeStatus}
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
+      />
+      {modal ? (
+        <EditModal
+          editTodo={editTodo}
+          handleSaveTask={handleSaveTask}
+          handleCloseModal={handleCloseModal}
+        />
+      ) : null}
     </div>
   );
 }
